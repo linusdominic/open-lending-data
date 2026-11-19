@@ -1,0 +1,3532 @@
+{
+  "hmda_lar": {
+    "description": "Every published field of the FFIEC Snapshot public LAR, 2018 onward, typed, with a decoded label next to every coded field. One row per published record.",
+    "primary_key": [
+      "activity_year",
+      "record_id"
+    ],
+    "columns": [
+      {
+        "name": "activity_year",
+        "type": "SMALLINT",
+        "kind": "year",
+        "nullable": false,
+        "description": "Calendar year of the final action."
+      },
+      {
+        "name": "record_id",
+        "type": "INTEGER",
+        "kind": "id",
+        "nullable": false,
+        "description": "Row number of the record in the published CSV (1 = first data line). Together with activity_year it identifies a record; the public LAR has no loan identifier."
+      },
+      {
+        "name": "lei",
+        "type": "VARCHAR",
+        "kind": "id",
+        "nullable": false,
+        "description": "Legal Entity Identifier of the reporting institution, upper-cased."
+      },
+      {
+        "name": "derived_msa_md",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "MSA/MD of the property, derived by the FFIEC; 99999 means not in an MSA/MD."
+      },
+      {
+        "name": "state_code",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Two-letter postal state code of the property; NULL when NA."
+      },
+      {
+        "name": "county_code",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Five-digit state+county FIPS code; NULL when NA."
+      },
+      {
+        "name": "census_tract",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Eleven-digit census tract (state+county+tract); NULL when NA."
+      },
+      {
+        "name": "conforming_loan_limit",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Whether the loan amount is within the GSE conforming loan limit (C, NC, U = undetermined, NA). Derived by the FFIEC.",
+        "allowed_values": [
+          "C",
+          "NC",
+          "U",
+          "NA"
+        ]
+      },
+      {
+        "name": "derived_loan_product_type",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Loan type and lien status, derived by the FFIEC.",
+        "allowed_values": [
+          "Conventional:First Lien",
+          "Conventional:Subordinate Lien",
+          "FHA:First Lien",
+          "FHA:Subordinate Lien",
+          "VA:First Lien",
+          "VA:Subordinate Lien",
+          "FSA/RHS:First Lien",
+          "FSA/RHS:Subordinate Lien"
+        ]
+      },
+      {
+        "name": "derived_dwelling_category",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Construction method and total units, derived by the FFIEC.",
+        "allowed_values": [
+          "Single Family (1-4 Units):Site-Built",
+          "Multifamily:Site-Built",
+          "Single Family (1-4 Units):Manufactured",
+          "Multifamily:Manufactured"
+        ]
+      },
+      {
+        "name": "derived_ethnicity",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Applicant and co-applicant ethnicity combined, derived by the FFIEC.",
+        "allowed_values": [
+          "Hispanic or Latino",
+          "Not Hispanic or Latino",
+          "Joint",
+          "Ethnicity Not Available",
+          "Free Form Text Only"
+        ]
+      },
+      {
+        "name": "derived_race",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Applicant and co-applicant race combined, derived by the FFIEC.",
+        "allowed_values": [
+          "American Indian or Alaska Native",
+          "Asian",
+          "Black or African American",
+          "Native Hawaiian or Other Pacific Islander",
+          "White",
+          "2 or more minority races",
+          "Joint",
+          "Free Form Text Only",
+          "Race Not Available"
+        ]
+      },
+      {
+        "name": "derived_sex",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Applicant and co-applicant sex combined, by the FFIEC.",
+        "allowed_values": [
+          "Male",
+          "Female",
+          "Joint",
+          "Sex Not Available"
+        ]
+      },
+      {
+        "name": "action_taken",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Action taken on the application or loan.",
+        "codes": {
+          "1": "Loan originated",
+          "2": "Application approved but not accepted",
+          "3": "Application denied",
+          "4": "Application withdrawn by applicant",
+          "5": "File closed for incompleteness",
+          "6": "Purchased loan",
+          "7": "Preapproval request denied",
+          "8": "Preapproval request approved but not accepted"
+        }
+      },
+      {
+        "name": "action_taken_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for action_taken (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "purchaser_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Type of entity that purchased the loan.",
+        "codes": {
+          "0": "Not applicable",
+          "1": "Fannie Mae",
+          "2": "Ginnie Mae",
+          "3": "Freddie Mac",
+          "4": "Farmer Mac",
+          "5": "Private securitizer",
+          "6": "Commercial bank, savings bank, or savings association",
+          "8": "Affiliate institution",
+          "9": "Other type of purchaser",
+          "71": "Credit union, mortgage company, or finance company",
+          "72": "Life insurance company"
+        }
+      },
+      {
+        "name": "purchaser_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for purchaser_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "preapproval",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Whether a preapproval was requested.",
+        "codes": {
+          "1": "Preapproval requested",
+          "2": "Preapproval not requested"
+        }
+      },
+      {
+        "name": "preapproval_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for preapproval (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "loan_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Loan type (insurance or guarantee).",
+        "codes": {
+          "1": "Conventional",
+          "2": "FHA insured",
+          "3": "VA guaranteed",
+          "4": "USDA RHS or FSA guaranteed"
+        }
+      },
+      {
+        "name": "loan_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for loan_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "loan_purpose",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Purpose of the loan.",
+        "codes": {
+          "1": "Home purchase",
+          "2": "Home improvement",
+          "4": "Other purpose",
+          "5": "Not applicable",
+          "31": "Refinancing",
+          "32": "Cash-out refinancing"
+        }
+      },
+      {
+        "name": "loan_purpose_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for loan_purpose (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "lien_status",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Lien status of the property securing the loan.",
+        "codes": {
+          "1": "Secured by a first lien",
+          "2": "Secured by a subordinate lien"
+        }
+      },
+      {
+        "name": "lien_status_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for lien_status (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "reverse_mortgage",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Whether the loan is a reverse mortgage.",
+        "codes": {
+          "1": "Reverse mortgage",
+          "2": "Not a reverse mortgage",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "reverse_mortgage_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for reverse_mortgage (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "open_end_line_of_credit",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Whether the loan is an open-end line of credit.",
+        "codes": {
+          "1": "Open-end line of credit",
+          "2": "Not an open-end line of credit",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "open_end_line_of_credit_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for open_end_line_of_credit (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "business_or_commercial_purpose",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Whether the loan is primarily for a business or commercial purpose.",
+        "codes": {
+          "1": "Primarily for a business or commercial purpose",
+          "2": "Not primarily for a business or commercial purpose",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "business_or_commercial_purpose_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for business_or_commercial_purpose (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "loan_amount",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Loan amount in US dollars. The public file reports the midpoint of the $10,000 interval containing the amount (e.g. 205000 for 200,000-209,999)."
+      },
+      {
+        "name": "loan_amount_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why loan_amount is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "combined_loan_to_value_ratio",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Combined loan-to-value ratio, percent. Published as loan_to_value_ratio in the 2018 file and as combined_loan_to_value_ratio from 2019; same field."
+      },
+      {
+        "name": "combined_loan_to_value_ratio_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why combined_loan_to_value_ratio is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "interest_rate",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Interest rate, percent."
+      },
+      {
+        "name": "interest_rate_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why interest_rate is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "rate_spread",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Difference between the APR and the average prime offer rate (APOR) for a comparable transaction, percentage points. Reported for all covered originations; can be negative."
+      },
+      {
+        "name": "rate_spread_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why rate_spread is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "hoepa_status",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Whether the loan is a high-cost mortgage (HOEPA).",
+        "codes": {
+          "1": "High-cost mortgage",
+          "2": "Not a high-cost mortgage",
+          "3": "Not applicable"
+        }
+      },
+      {
+        "name": "hoepa_status_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for hoepa_status (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "total_loan_costs",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Total loan costs (closed-end loans), US dollars."
+      },
+      {
+        "name": "total_loan_costs_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why total_loan_costs is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "total_points_and_fees",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Total points and fees (open-end/QM), US dollars."
+      },
+      {
+        "name": "total_points_and_fees_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why total_points_and_fees is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "origination_charges",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Total origination charges, US dollars."
+      },
+      {
+        "name": "origination_charges_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why origination_charges is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "discount_points",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Discount points, US dollars."
+      },
+      {
+        "name": "discount_points_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why discount_points is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "lender_credits",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Lender credits, US dollars."
+      },
+      {
+        "name": "lender_credits_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why lender_credits is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "loan_term",
+        "type": "INTEGER",
+        "kind": "number",
+        "nullable": true,
+        "description": "Loan term in months."
+      },
+      {
+        "name": "loan_term_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why loan_term is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "prepayment_penalty_term",
+        "type": "INTEGER",
+        "kind": "number",
+        "nullable": true,
+        "description": "Prepayment penalty term in months."
+      },
+      {
+        "name": "prepayment_penalty_term_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why prepayment_penalty_term is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "intro_rate_period",
+        "type": "INTEGER",
+        "kind": "number",
+        "nullable": true,
+        "description": "Introductory rate period in months."
+      },
+      {
+        "name": "intro_rate_period_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why intro_rate_period is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "negative_amortization",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Negative amort.",
+        "codes": {
+          "1": "Negative amortization",
+          "2": "No negative amortization",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "negative_amortization_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for negative_amortization (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "interest_only_payment",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Interest-only payments.",
+        "codes": {
+          "1": "Interest-only payments",
+          "2": "No interest-only payments",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "interest_only_payment_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for interest_only_payment (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "balloon_payment",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Balloon payment.",
+        "codes": {
+          "1": "Balloon payment",
+          "2": "No balloon payment",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "balloon_payment_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for balloon_payment (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "other_nonamortizing_features",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Other non-fully amortizing features.",
+        "codes": {
+          "1": "Other non-fully amortizing features",
+          "2": "No other non-fully amortizing features",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "other_nonamortizing_features_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for other_nonamortizing_features (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "property_value",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Property value in US dollars; the public file reports the midpoint of the $10,000 interval."
+      },
+      {
+        "name": "property_value_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why property_value is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "construction_method",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Construction method of the dwelling.",
+        "codes": {
+          "1": "Site-built",
+          "2": "Manufactured home"
+        }
+      },
+      {
+        "name": "construction_method_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for construction_method (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "occupancy_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Occupancy type of the dwelling.",
+        "codes": {
+          "1": "Principal residence",
+          "2": "Second residence",
+          "3": "Investment property"
+        }
+      },
+      {
+        "name": "occupancy_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for occupancy_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "manufactured_home_secured_property_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Manufactured home secured property type.",
+        "codes": {
+          "1": "Manufactured home and land",
+          "2": "Manufactured home and not land",
+          "3": "Not applicable",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "manufactured_home_secured_property_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for manufactured_home_secured_property_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "manufactured_home_land_property_interest",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Manufactured home land property interest.",
+        "codes": {
+          "1": "Direct ownership",
+          "2": "Indirect ownership",
+          "3": "Paid leasehold",
+          "4": "Unpaid leasehold",
+          "5": "Not applicable",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "manufactured_home_land_property_interest_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for manufactured_home_land_property_interest (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "total_units",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Number of individual dwelling units (banded above 4).",
+        "allowed_values": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5-24",
+          "25-49",
+          "50-99",
+          "100-149",
+          ">149"
+        ]
+      },
+      {
+        "name": "multifamily_affordable_units",
+        "type": "INTEGER",
+        "kind": "number",
+        "nullable": true,
+        "description": "Income-restricted units in a multifamily dwelling."
+      },
+      {
+        "name": "multifamily_affordable_units_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why multifamily_affordable_units is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "income",
+        "type": "INTEGER",
+        "kind": "number",
+        "nullable": true,
+        "description": "Gross annual income relied on, in thousands of US dollars."
+      },
+      {
+        "name": "income_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why income is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "debt_to_income_ratio",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Debt-to-income ratio, banded by the FFIEC in the public file; 36-49 are exact.",
+        "allowed_values": [
+          "<20%",
+          "20%-<30%",
+          "30%-<36%",
+          "36",
+          "37",
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43",
+          "44",
+          "45",
+          "46",
+          "47",
+          "48",
+          "49",
+          "50%-60%",
+          ">60%",
+          "NA",
+          "Exempt"
+        ]
+      },
+      {
+        "name": "applicant_credit_score_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Credit scoring model (applicant). The score itself is not public.",
+        "codes": {
+          "1": "Equifax Beacon 5.0",
+          "2": "Experian Fair Isaac",
+          "3": "FICO Risk Score Classic 04",
+          "4": "FICO Risk Score Classic 98",
+          "5": "VantageScore 2.0",
+          "6": "VantageScore 3.0",
+          "7": "More than one credit scoring model",
+          "8": "Other credit scoring model",
+          "9": "Not applicable",
+          "10": "No co-applicant",
+          "11": "FICO Score 9",
+          "12": "FICO Score 8",
+          "13": "FICO Score 10",
+          "14": "FICO Score 10 T",
+          "15": "VantageScore 4.0",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "applicant_credit_score_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_credit_score_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_credit_score_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Credit scoring model (co-applicant).",
+        "codes": {
+          "1": "Equifax Beacon 5.0",
+          "2": "Experian Fair Isaac",
+          "3": "FICO Risk Score Classic 04",
+          "4": "FICO Risk Score Classic 98",
+          "5": "VantageScore 2.0",
+          "6": "VantageScore 3.0",
+          "7": "More than one credit scoring model",
+          "8": "Other credit scoring model",
+          "9": "Not applicable",
+          "10": "No co-applicant",
+          "11": "FICO Score 9",
+          "12": "FICO Score 8",
+          "13": "FICO Score 10",
+          "14": "FICO Score 10 T",
+          "15": "VantageScore 4.0",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "co_applicant_credit_score_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_credit_score_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_ethnicity_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (applicant), field 1 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "applicant_ethnicity_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_ethnicity_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_ethnicity_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (applicant), field 2 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "applicant_ethnicity_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_ethnicity_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_ethnicity_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (applicant), field 3 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "applicant_ethnicity_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_ethnicity_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_ethnicity_4",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (applicant), field 4 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "applicant_ethnicity_4_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_ethnicity_4 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_ethnicity_5",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (applicant), field 5 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "applicant_ethnicity_5_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_ethnicity_5 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_ethnicity_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (co-applicant), field 1 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "co_applicant_ethnicity_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_ethnicity_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_ethnicity_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (co-applicant), field 2 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "co_applicant_ethnicity_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_ethnicity_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_ethnicity_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (co-applicant), field 3 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "co_applicant_ethnicity_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_ethnicity_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_ethnicity_4",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (co-applicant), field 4 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "co_applicant_ethnicity_4_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_ethnicity_4 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_ethnicity_5",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity (co-applicant), field 5 of 5. Codes 11-14 are Hispanic or Latino subgroups.",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "11": "Mexican",
+          "12": "Puerto Rican",
+          "13": "Cuban",
+          "14": "Other Hispanic or Latino"
+        }
+      },
+      {
+        "name": "co_applicant_ethnicity_5_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_ethnicity_5 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_ethnicity_observed",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Ethnicity collected by observation.",
+        "codes": {
+          "1": "Collected on the basis of visual observation or surname",
+          "2": "Not collected on the basis of visual observation or surname",
+          "3": "Not applicable",
+          "4": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_ethnicity_observed_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_ethnicity_observed (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_ethnicity_observed",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant ethnicity observed.",
+        "codes": {
+          "1": "Collected on the basis of visual observation or surname",
+          "2": "Not collected on the basis of visual observation or surname",
+          "3": "Not applicable",
+          "4": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_ethnicity_observed_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_ethnicity_observed (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (applicant), field 1 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "applicant_race_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (applicant), field 2 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "applicant_race_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (applicant), field 3 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "applicant_race_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_4",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (applicant), field 4 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "applicant_race_4_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_4 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_5",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (applicant), field 5 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "applicant_race_5_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_5 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (co-applicant), field 1 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "co_applicant_race_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (co-applicant), field 2 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "co_applicant_race_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (co-applicant), field 3 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "co_applicant_race_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_4",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (co-applicant), field 4 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "co_applicant_race_4_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_4 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_5",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race (co-applicant), field 5 of 5. Codes 21-27 and 41-44 are Asian and NHOPI subgroups.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant",
+          "21": "Asian Indian",
+          "22": "Chinese",
+          "23": "Filipino",
+          "24": "Japanese",
+          "25": "Korean",
+          "26": "Vietnamese",
+          "27": "Other Asian",
+          "41": "Native Hawaiian",
+          "42": "Guamanian or Chamorro",
+          "43": "Samoan",
+          "44": "Other Pacific Islander"
+        }
+      },
+      {
+        "name": "co_applicant_race_5_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_5 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_observed",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Race collected by visual observation.",
+        "codes": {
+          "1": "Collected on the basis of visual observation or surname",
+          "2": "Not collected on the basis of visual observation or surname",
+          "3": "Not applicable",
+          "4": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_race_observed_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_observed (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_observed",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant race observed.",
+        "codes": {
+          "1": "Collected on the basis of visual observation or surname",
+          "2": "Not collected on the basis of visual observation or surname",
+          "3": "Not applicable",
+          "4": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_race_observed_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_observed (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_sex",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Sex of applicant.",
+        "codes": {
+          "1": "Male",
+          "2": "Female",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "6": "Applicant selected both male and female"
+        }
+      },
+      {
+        "name": "applicant_sex_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_sex (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_sex",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Sex of co-applicant.",
+        "codes": {
+          "1": "Male",
+          "2": "Female",
+          "3": "Information not provided by applicant in mail, internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "6": "Applicant selected both male and female"
+        }
+      },
+      {
+        "name": "co_applicant_sex_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_sex (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_sex_observed",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Sex collected by visual observation.",
+        "codes": {
+          "1": "Collected on the basis of visual observation or surname",
+          "2": "Not collected on the basis of visual observation or surname",
+          "3": "Not applicable",
+          "4": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_sex_observed_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_sex_observed (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_sex_observed",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant sex observed.",
+        "codes": {
+          "1": "Collected on the basis of visual observation or surname",
+          "2": "Not collected on the basis of visual observation or surname",
+          "3": "Not applicable",
+          "4": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_sex_observed_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_sex_observed (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_age",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Age band of applicant; 8888 = not applicable.",
+        "allowed_values": [
+          "<25",
+          "25-34",
+          "35-44",
+          "45-54",
+          "55-64",
+          "65-74",
+          ">74",
+          "8888",
+          "9999"
+        ]
+      },
+      {
+        "name": "co_applicant_age",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Age band of co-applicant; 8888 = not applicable, 9999 = no co-applicant.",
+        "allowed_values": [
+          "<25",
+          "25-34",
+          "35-44",
+          "45-54",
+          "55-64",
+          "65-74",
+          ">74",
+          "8888",
+          "9999"
+        ]
+      },
+      {
+        "name": "applicant_age_above_62",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Whether the applicant is 62 or older.",
+        "allowed_values": [
+          "Yes",
+          "No",
+          "NA"
+        ]
+      },
+      {
+        "name": "co_applicant_age_above_62",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Whether the co-applicant is 62 or older.",
+        "allowed_values": [
+          "Yes",
+          "No",
+          "NA"
+        ]
+      },
+      {
+        "name": "submission_of_application",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Whether the application was submitted directly to the institution.",
+        "codes": {
+          "1": "Submitted directly to the institution",
+          "2": "Not submitted directly to the institution",
+          "3": "Not applicable",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "submission_of_application_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for submission_of_application (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "initially_payable_to_institution",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Whether the obligation was initially payable to the institution.",
+        "codes": {
+          "1": "Initially payable to the institution",
+          "2": "Not initially payable to the institution",
+          "3": "Not applicable",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "initially_payable_to_institution_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for initially_payable_to_institution (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "aus_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Automated underwriting system, field 1 of 5.",
+        "codes": {
+          "1": "Desktop Underwriter (DU)",
+          "2": "Loan Prospector (LP) or Loan Product Advisor",
+          "3": "Technology Open to Approved Lenders (TOTAL) Scorecard",
+          "4": "Guaranteed Underwriting System (GUS)",
+          "5": "Other",
+          "6": "Not applicable",
+          "7": "Internal proprietary system",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "aus_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for aus_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "aus_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Automated underwriting system, field 2 of 5.",
+        "codes": {
+          "1": "Desktop Underwriter (DU)",
+          "2": "Loan Prospector (LP) or Loan Product Advisor",
+          "3": "Technology Open to Approved Lenders (TOTAL) Scorecard",
+          "4": "Guaranteed Underwriting System (GUS)",
+          "5": "Other",
+          "6": "Not applicable",
+          "7": "Internal proprietary system",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "aus_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for aus_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "aus_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Automated underwriting system, field 3 of 5.",
+        "codes": {
+          "1": "Desktop Underwriter (DU)",
+          "2": "Loan Prospector (LP) or Loan Product Advisor",
+          "3": "Technology Open to Approved Lenders (TOTAL) Scorecard",
+          "4": "Guaranteed Underwriting System (GUS)",
+          "5": "Other",
+          "6": "Not applicable",
+          "7": "Internal proprietary system",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "aus_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for aus_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "aus_4",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Automated underwriting system, field 4 of 5.",
+        "codes": {
+          "1": "Desktop Underwriter (DU)",
+          "2": "Loan Prospector (LP) or Loan Product Advisor",
+          "3": "Technology Open to Approved Lenders (TOTAL) Scorecard",
+          "4": "Guaranteed Underwriting System (GUS)",
+          "5": "Other",
+          "6": "Not applicable",
+          "7": "Internal proprietary system",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "aus_4_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for aus_4 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "aus_5",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Automated underwriting system, field 5 of 5.",
+        "codes": {
+          "1": "Desktop Underwriter (DU)",
+          "2": "Loan Prospector (LP) or Loan Product Advisor",
+          "3": "Technology Open to Approved Lenders (TOTAL) Scorecard",
+          "4": "Guaranteed Underwriting System (GUS)",
+          "5": "Other",
+          "6": "Not applicable",
+          "7": "Internal proprietary system",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "aus_5_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for aus_5 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "denial_reason_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Reason for denial, field 1 of 4.",
+        "codes": {
+          "1": "Debt-to-income ratio",
+          "2": "Employment history",
+          "3": "Credit history",
+          "4": "Collateral",
+          "5": "Insufficient cash (downpayment, closing costs)",
+          "6": "Unverifiable information",
+          "7": "Credit application incomplete",
+          "8": "Mortgage insurance denied",
+          "9": "Other",
+          "10": "Not applicable",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "denial_reason_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for denial_reason_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "denial_reason_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Reason for denial, field 2 of 4.",
+        "codes": {
+          "1": "Debt-to-income ratio",
+          "2": "Employment history",
+          "3": "Credit history",
+          "4": "Collateral",
+          "5": "Insufficient cash (downpayment, closing costs)",
+          "6": "Unverifiable information",
+          "7": "Credit application incomplete",
+          "8": "Mortgage insurance denied",
+          "9": "Other",
+          "10": "Not applicable",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "denial_reason_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for denial_reason_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "denial_reason_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Reason for denial, field 3 of 4.",
+        "codes": {
+          "1": "Debt-to-income ratio",
+          "2": "Employment history",
+          "3": "Credit history",
+          "4": "Collateral",
+          "5": "Insufficient cash (downpayment, closing costs)",
+          "6": "Unverifiable information",
+          "7": "Credit application incomplete",
+          "8": "Mortgage insurance denied",
+          "9": "Other",
+          "10": "Not applicable",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "denial_reason_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for denial_reason_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "denial_reason_4",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Reason for denial, field 4 of 4.",
+        "codes": {
+          "1": "Debt-to-income ratio",
+          "2": "Employment history",
+          "3": "Credit history",
+          "4": "Collateral",
+          "5": "Insufficient cash (downpayment, closing costs)",
+          "6": "Unverifiable information",
+          "7": "Credit application incomplete",
+          "8": "Mortgage insurance denied",
+          "9": "Other",
+          "10": "Not applicable",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "denial_reason_4_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for denial_reason_4 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "tract_population",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Total population of the census tract."
+      },
+      {
+        "name": "tract_minority_population_percent",
+        "type": "DOUBLE",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Minority population as a percent of tract population."
+      },
+      {
+        "name": "ffiec_msa_md_median_family_income",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "FFIEC median family income of the MSA/MD, USD."
+      },
+      {
+        "name": "tract_to_msa_income_percentage",
+        "type": "DOUBLE",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Tract median family income as a percent of the MSA/MD median family income."
+      },
+      {
+        "name": "tract_owner_occupied_units",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Owner-occupied dwellings in the tract."
+      },
+      {
+        "name": "tract_one_to_four_family_homes",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "One-to-four family dwellings in the tract."
+      },
+      {
+        "name": "tract_median_age_of_housing_units",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Median age of housing units in the tract."
+      }
+    ]
+  },
+  "hmda_lar_core": {
+    "description": "A common schema for every covered year (pre-2018 CFPB historic LAR and 2018+ snapshot LAR), with codes mapped to shared definitions.",
+    "primary_key": [
+      "activity_year",
+      "record_id"
+    ],
+    "columns": [
+      {
+        "name": "activity_year",
+        "type": "SMALLINT",
+        "kind": "year",
+        "nullable": false,
+        "description": "Calendar year of the final action."
+      },
+      {
+        "name": "record_id",
+        "type": "INTEGER",
+        "kind": "id",
+        "nullable": false,
+        "description": "Row number in the source file, unique within a year."
+      },
+      {
+        "name": "source_era",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": false,
+        "description": "Which published format the row came from.",
+        "allowed_values": [
+          "pre2018",
+          "2018plus"
+        ]
+      },
+      {
+        "name": "lender_key",
+        "type": "VARCHAR",
+        "kind": "id",
+        "nullable": false,
+        "description": "Key into the lenders table: the LEI from 2018, 'agency_code-respondent_id' (the 'ARID' used by the FFIEC) before 2018."
+      },
+      {
+        "name": "lei",
+        "type": "VARCHAR",
+        "kind": "id",
+        "nullable": true,
+        "description": "Legal Entity Identifier (2018+; NULL before 2018)."
+      },
+      {
+        "name": "respondent_id",
+        "type": "VARCHAR",
+        "kind": "id",
+        "nullable": true,
+        "description": "Pre-2018 respondent identifier (10 characters)."
+      },
+      {
+        "name": "agency_code",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Supervisory agency of the reporter. Pre-2018 from the LAR; 2018+ from the Transmittal Sheet.",
+        "codes": {
+          "1": "Office of the Comptroller of the Currency (OCC)",
+          "2": "Federal Reserve System (FRS)",
+          "3": "Federal Deposit Insurance Corporation (FDIC)",
+          "4": "Office of Thrift Supervision (OTS)",
+          "5": "National Credit Union Administration (NCUA)",
+          "7": "Department of Housing and Urban Development (HUD)",
+          "9": "Consumer Financial Protection Bureau (CFPB)"
+        }
+      },
+      {
+        "name": "agency_code_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for agency_code (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "loan_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Loan type. Same codes in both eras.",
+        "codes": {
+          "1": "Conventional",
+          "2": "FHA insured",
+          "3": "VA guaranteed",
+          "4": "USDA RHS or FSA guaranteed"
+        }
+      },
+      {
+        "name": "loan_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for loan_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "property_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Dwelling type. Pre-2018 property_type; 2018+ from construction_method and total_units.",
+        "codes": {
+          "1": "One-to-four family, site-built",
+          "2": "One-to-four family, manufactured housing",
+          "3": "Multifamily (5+ units)"
+        }
+      },
+      {
+        "name": "property_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for property_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "loan_purpose",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Loan purpose. 2018+ codes 31 and 32 (refinance, cash-out refinance) map to 3.",
+        "codes": {
+          "1": "Home purchase",
+          "2": "Home improvement",
+          "3": "Refinancing (including cash-out)",
+          "4": "Other purpose (2018+ only)",
+          "5": "Not applicable (2018+ only)"
+        }
+      },
+      {
+        "name": "loan_purpose_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for loan_purpose (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "occupancy",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Occupancy. 2018+ second residence (2) and investment property (3) map to 2.",
+        "codes": {
+          "1": "Principal residence",
+          "2": "Not a principal residence (second home or investment)",
+          "3": "Not applicable (pre-2018 only)"
+        }
+      },
+      {
+        "name": "occupancy_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for occupancy (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "preapproval",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Preapproval requested.",
+        "codes": {
+          "1": "Preapproval requested",
+          "2": "Preapproval not requested",
+          "3": "Not applicable (pre-2018 only)"
+        }
+      },
+      {
+        "name": "preapproval_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for preapproval (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "action_taken",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Action taken. Same codes 1-8 in both eras.",
+        "codes": {
+          "1": "Loan originated",
+          "2": "Application approved but not accepted",
+          "3": "Application denied",
+          "4": "Application withdrawn by applicant",
+          "5": "File closed for incompleteness",
+          "6": "Purchased loan",
+          "7": "Preapproval request denied",
+          "8": "Preapproval request approved but not accepted"
+        }
+      },
+      {
+        "name": "action_taken_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for action_taken (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "loan_amount",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Loan amount in US dollars. Pre-2018: reported thousands x 1000. 2018+: midpoint of the $10,000 interval. Not comparable at the $10,000 level."
+      },
+      {
+        "name": "loan_amount_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why loan_amount is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "applicant_income_000s",
+        "type": "INTEGER",
+        "kind": "number",
+        "nullable": true,
+        "description": "Gross annual income, thousands of US dollars."
+      },
+      {
+        "name": "applicant_income_000s_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why applicant_income_000s is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "msa_md",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "MSA/MD code as published that year (delineations change)."
+      },
+      {
+        "name": "state_fips",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Two-digit state FIPS code."
+      },
+      {
+        "name": "county_fips",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Five-digit state+county FIPS code."
+      },
+      {
+        "name": "census_tract",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Eleven-digit census tract (state+county+6-digit tract)."
+      },
+      {
+        "name": "applicant_ethnicity",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Applicant ethnicity (first field; 2018+ subgroups 11-14 map to 1).",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, Internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_ethnicity_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_ethnicity (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_ethnicity",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant ethnicity (first field).",
+        "codes": {
+          "1": "Hispanic or Latino",
+          "2": "Not Hispanic or Latino",
+          "3": "Information not provided by applicant in mail, Internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_ethnicity_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_ethnicity (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Applicant race field 1; 2018+ subgroups map to major groups 2 and 4.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_race_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Applicant race field 2; 2018+ subgroups map to major groups 2 and 4.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_race_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Applicant race field 3; 2018+ subgroups map to major groups 2 and 4.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_race_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_4",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Applicant race field 4; 2018+ subgroups map to major groups 2 and 4.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_race_4_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_4 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_race_5",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Applicant race field 5; 2018+ subgroups map to major groups 2 and 4.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "applicant_race_5_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_race_5 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant race field 1.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_race_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant race field 2.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_race_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant race field 3.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_race_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_4",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant race field 4.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_race_4_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_4 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_race_5",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant race field 5.",
+        "codes": {
+          "1": "American Indian or Alaska Native",
+          "2": "Asian",
+          "3": "Black or African American",
+          "4": "Native Hawaiian or Other Pacific Islander",
+          "5": "White",
+          "6": "Information not provided by applicant in mail, Internet, or telephone application",
+          "7": "Not applicable",
+          "8": "No co-applicant"
+        }
+      },
+      {
+        "name": "co_applicant_race_5_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_race_5 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "applicant_sex",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Applicant sex.",
+        "codes": {
+          "1": "Male",
+          "2": "Female",
+          "3": "Information not provided by applicant in mail, Internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "6": "Applicant selected both male and female (2018+ only)"
+        }
+      },
+      {
+        "name": "applicant_sex_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for applicant_sex (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "co_applicant_sex",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Co-applicant sex.",
+        "codes": {
+          "1": "Male",
+          "2": "Female",
+          "3": "Information not provided by applicant in mail, Internet, or telephone application",
+          "4": "Not applicable",
+          "5": "No co-applicant",
+          "6": "Applicant selected both male and female (2018+ only)"
+        }
+      },
+      {
+        "name": "co_applicant_sex_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for co_applicant_sex (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "derived_race",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "FFIEC 2018 derived-race rule applied to both eras by this project (see docs/changes-over-time.md). For 2018+ it reproduces the FFIEC's own derived_race.",
+        "allowed_values": [
+          "American Indian or Alaska Native",
+          "Asian",
+          "Black or African American",
+          "Native Hawaiian or Other Pacific Islander",
+          "White",
+          "2 or more minority races",
+          "Joint",
+          "Free Form Text Only",
+          "Race Not Available"
+        ]
+      },
+      {
+        "name": "derived_ethnicity",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "FFIEC 2018 derived-ethnicity rule, both eras.",
+        "allowed_values": [
+          "Hispanic or Latino",
+          "Not Hispanic or Latino",
+          "Joint",
+          "Ethnicity Not Available",
+          "Free Form Text Only"
+        ]
+      },
+      {
+        "name": "derived_sex",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "FFIEC 2018 derived-sex rule, both eras.",
+        "allowed_values": [
+          "Male",
+          "Female",
+          "Joint",
+          "Sex Not Available"
+        ]
+      },
+      {
+        "name": "purchaser_type",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Purchaser type; 2018+ 71 and 72 map to 7.",
+        "codes": {
+          "0": "Not sold (or not applicable)",
+          "1": "Fannie Mae",
+          "2": "Ginnie Mae",
+          "3": "Freddie Mac",
+          "4": "Farmer Mac",
+          "5": "Private securitization",
+          "6": "Commercial bank, savings bank or savings association",
+          "7": "Life insurance company, credit union, mortgage bank, or finance company",
+          "8": "Affiliate institution",
+          "9": "Other type of purchaser"
+        }
+      },
+      {
+        "name": "purchaser_type_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for purchaser_type (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "denial_reason_1",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Denial reason 1 of 3 (2018+ field 4 is dropped; code 10 'not applicable' becomes NULL).",
+        "codes": {
+          "1": "Debt-to-income ratio",
+          "2": "Employment history",
+          "3": "Credit history",
+          "4": "Collateral",
+          "5": "Insufficient cash (downpayment, closing costs)",
+          "6": "Unverifiable information",
+          "7": "Credit application incomplete",
+          "8": "Mortgage insurance denied",
+          "9": "Other"
+        }
+      },
+      {
+        "name": "denial_reason_1_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for denial_reason_1 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "denial_reason_2",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Denial reason 2 of 3 (2018+ field 4 is dropped; code 10 'not applicable' becomes NULL).",
+        "codes": {
+          "1": "Debt-to-income ratio",
+          "2": "Employment history",
+          "3": "Credit history",
+          "4": "Collateral",
+          "5": "Insufficient cash (downpayment, closing costs)",
+          "6": "Unverifiable information",
+          "7": "Credit application incomplete",
+          "8": "Mortgage insurance denied",
+          "9": "Other"
+        }
+      },
+      {
+        "name": "denial_reason_2_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for denial_reason_2 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "denial_reason_3",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Denial reason 3 of 3 (2018+ field 4 is dropped; code 10 'not applicable' becomes NULL).",
+        "codes": {
+          "1": "Debt-to-income ratio",
+          "2": "Employment history",
+          "3": "Credit history",
+          "4": "Collateral",
+          "5": "Insufficient cash (downpayment, closing costs)",
+          "6": "Unverifiable information",
+          "7": "Credit application incomplete",
+          "8": "Mortgage insurance denied",
+          "9": "Other"
+        }
+      },
+      {
+        "name": "denial_reason_3_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for denial_reason_3 (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "rate_spread",
+        "type": "DOUBLE",
+        "kind": "number",
+        "nullable": true,
+        "description": "Rate spread as published (definitions differ by era; see docs)."
+      },
+      {
+        "name": "rate_spread_na_reason",
+        "type": "VARCHAR",
+        "kind": "na_reason",
+        "nullable": true,
+        "description": "Why rate_spread is NULL: 'NA' (not applicable) or 'Exempt' (partial exemption under EGRRCPA); NULL when a value is present."
+      },
+      {
+        "name": "higher_priced",
+        "type": "BOOLEAN",
+        "kind": "bool",
+        "nullable": true,
+        "description": "Originated loan with a rate spread at or above the pre-2018 HMDA reporting threshold (APOR + 1.5 pp first lien, + 3.5 pp subordinate lien). Comparable from 2010 (applications after 1 Oct 2009); NULL for non-originations and for 2007-2009."
+      },
+      {
+        "name": "hoepa_status",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "High-cost (HOEPA) status.",
+        "codes": {
+          "1": "High-cost (HOEPA) loan",
+          "2": "Not a high-cost loan",
+          "3": "Not applicable"
+        }
+      },
+      {
+        "name": "hoepa_status_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for hoepa_status (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "application_date_before_2004",
+        "type": "BOOLEAN",
+        "kind": "bool",
+        "nullable": true,
+        "description": "Pre-2018 application date indicator: true when the application was taken before 1 Jan 2004 (some 2007 records); NULL from 2018."
+      },
+      {
+        "name": "lien_status",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Lien status; codes 3 and 4 only occur pre-2018.",
+        "codes": {
+          "1": "Secured by a first lien",
+          "2": "Secured by a subordinate lien",
+          "3": "Not secured by a lien",
+          "4": "Not applicable (purchased loans)"
+        }
+      },
+      {
+        "name": "lien_status_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for lien_status (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "open_end_line_of_credit",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "2018+ only; NULL before 2018.",
+        "codes": {
+          "1": "Open-end line of credit",
+          "2": "Not an open-end line of credit",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "open_end_line_of_credit_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for open_end_line_of_credit (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "reverse_mortgage",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "2018+ only; NULL before 2018.",
+        "codes": {
+          "1": "Reverse mortgage",
+          "2": "Not a reverse mortgage",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "reverse_mortgage_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for reverse_mortgage (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "business_or_commercial_purpose",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "2018+ only; NULL before 2018.",
+        "codes": {
+          "1": "Primarily for a business or commercial purpose",
+          "2": "Not primarily for a business or commercial purpose",
+          "1111": "Exempt"
+        }
+      },
+      {
+        "name": "business_or_commercial_purpose_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for business_or_commercial_purpose (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "tract_population",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Tract population."
+      },
+      {
+        "name": "tract_minority_population_percent",
+        "type": "DOUBLE",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Tract minority population, percent."
+      },
+      {
+        "name": "ffiec_msa_md_median_family_income",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "FFIEC/HUD median family income of the MSA/MD."
+      },
+      {
+        "name": "tract_to_msa_income_percentage",
+        "type": "DOUBLE",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Tract to MSA/MD income, percent."
+      },
+      {
+        "name": "tract_owner_occupied_units",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Owner-occupied units in the tract."
+      },
+      {
+        "name": "tract_one_to_four_family_homes",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "One-to-four family homes in the tract."
+      }
+    ]
+  },
+  "lenders": {
+    "description": "One row per lender per year: Transmittal Sheet, Reporter Panel identifiers and the FDIC certificate where the RSSD id matches an FDIC-insured institution.",
+    "primary_key": [
+      "activity_year",
+      "lender_key"
+    ],
+    "columns": [
+      {
+        "name": "activity_year",
+        "type": "SMALLINT",
+        "kind": "year",
+        "nullable": false,
+        "description": "HMDA activity year."
+      },
+      {
+        "name": "lender_key",
+        "type": "VARCHAR",
+        "kind": "id",
+        "nullable": false,
+        "description": "LEI (2018+) or 'agency_code-respondent_id' (pre-2018)."
+      },
+      {
+        "name": "lei",
+        "type": "VARCHAR",
+        "kind": "id",
+        "nullable": true,
+        "description": "Legal Entity Identifier. Pre-2018 rows are filled from the FFIEC ARID-to-LEI crosswalk where the institution later reported with an LEI."
+      },
+      {
+        "name": "respondent_id",
+        "type": "VARCHAR",
+        "kind": "id",
+        "nullable": true,
+        "description": "Pre-2018 respondent identifier."
+      },
+      {
+        "name": "agency_code",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Supervisory agency.",
+        "codes": {
+          "1": "Office of the Comptroller of the Currency (OCC)",
+          "2": "Federal Reserve System (FRS)",
+          "3": "Federal Deposit Insurance Corporation (FDIC)",
+          "4": "Office of Thrift Supervision (OTS)",
+          "5": "National Credit Union Administration (NCUA)",
+          "7": "Department of Housing and Urban Development (HUD)",
+          "9": "Consumer Financial Protection Bureau (CFPB)"
+        }
+      },
+      {
+        "name": "agency_code_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for agency_code (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "respondent_name",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Institution name as reported on the Transmittal Sheet."
+      },
+      {
+        "name": "respondent_city",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "City on the Transmittal Sheet."
+      },
+      {
+        "name": "respondent_state",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "State on the Transmittal Sheet."
+      },
+      {
+        "name": "tax_id",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Federal tax id from the Transmittal Sheet."
+      },
+      {
+        "name": "ts_lar_count",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Number of LAR records the institution reported (TS)."
+      },
+      {
+        "name": "ts_present",
+        "type": "BOOLEAN",
+        "kind": "bool",
+        "nullable": true,
+        "description": "False when the lender has LAR records that year but no Transmittal Sheet row; its name and ids then come from the nearest year that has them."
+      },
+      {
+        "name": "lar_records",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Number of rows for this lender in hmda_lar_core."
+      },
+      {
+        "name": "rssd_id",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Federal Reserve RSSD id of the respondent."
+      },
+      {
+        "name": "rssd_source",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "Where rssd_id came from.",
+        "allowed_values": [
+          "panel",
+          "panel_other_year",
+          "respondent_id_frs",
+          "none"
+        ]
+      },
+      {
+        "name": "parent_rssd_id",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "RSSD id of the parent (Reporter Panel)."
+      },
+      {
+        "name": "top_holder_rssd_id",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "RSSD id of the top holder (Reporter Panel)."
+      },
+      {
+        "name": "top_holder_name",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Top holder name (Reporter Panel)."
+      },
+      {
+        "name": "assets_000s",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Assets in thousands of dollars as given in the Reporter Panel (definitions vary by lender type; -1 / blank become NULL)."
+      },
+      {
+        "name": "other_lender_code",
+        "type": "SMALLINT",
+        "kind": "code",
+        "nullable": true,
+        "description": "Reporter Panel lender type.",
+        "codes": {
+          "0": "Depository institution",
+          "1": "Mortgage bank subsidiary of a bank holding company or savings and loan holding company",
+          "2": "Independent mortgage company",
+          "3": "Mortgage bank affiliate of a depository institution",
+          "5": "Affiliate of a depository institution"
+        }
+      },
+      {
+        "name": "other_lender_code_label",
+        "type": "VARCHAR",
+        "kind": "label",
+        "nullable": true,
+        "description": "Label for other_lender_code (NULL when the code is not in the code list)."
+      },
+      {
+        "name": "fdic_cert",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "FDIC certificate number, matched on rssd_id to FDIC BankFind institutions (FED_RSSD)."
+      },
+      {
+        "name": "fdic_name",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "FDIC institution name for the matched certificate."
+      },
+      {
+        "name": "fdic_match_method",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "rssd = rssd_id equals FDIC FED_RSSD; respondent_id_cert = pre-2018 FDIC-supervised respondent whose respondent_id is an FDIC certificate number.",
+        "allowed_values": [
+          "rssd",
+          "respondent_id_cert"
+        ]
+      }
+    ]
+  },
+  "bank_financials": {
+    "description": "Selected FDIC quarterly Call Report aggregates for every FDIC-insured institution, 2007 onward.",
+    "primary_key": [
+      "cert",
+      "report_date"
+    ],
+    "columns": [
+      {
+        "name": "cert",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": false,
+        "description": "FDIC certificate number."
+      },
+      {
+        "name": "rssd_id",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "Federal Reserve RSSD id (RSSDID)."
+      },
+      {
+        "name": "report_date",
+        "type": "DATE",
+        "kind": "date",
+        "nullable": false,
+        "description": "Quarter-end report date (REPDTE)."
+      },
+      {
+        "name": "year",
+        "type": "SMALLINT",
+        "kind": "year",
+        "nullable": false,
+        "description": "Calendar year of report_date."
+      },
+      {
+        "name": "quarter",
+        "type": "SMALLINT",
+        "kind": "integer",
+        "nullable": false,
+        "description": "Calendar quarter of report_date."
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Institution name at that date."
+      },
+      {
+        "name": "total_assets",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "ASSET: total assets, $000."
+      },
+      {
+        "name": "total_deposits",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "DEP: total deposits, $000."
+      },
+      {
+        "name": "equity_capital",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "EQ: total equity capital, $000."
+      },
+      {
+        "name": "loans_and_leases_gross",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "LNLSGR: total loans and leases, $000."
+      },
+      {
+        "name": "loans_and_leases_net",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "LNLSNET: net loans and leases, $000."
+      },
+      {
+        "name": "real_estate_loans",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "LNRE: loans secured by real estate, $000."
+      },
+      {
+        "name": "re_1_4_family_loans",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "LNRERES: loans secured by 1-4 family residential properties, $000."
+      },
+      {
+        "name": "re_1_4_family_lines",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "LNRELOC: 1-4 family revolving open-end lines, $000."
+      },
+      {
+        "name": "re_multifamily_loans",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "LNREMULT: multifamily real estate loans, $000."
+      },
+      {
+        "name": "net_income",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "NETINC: net income year to date, $000."
+      },
+      {
+        "name": "roa",
+        "type": "DOUBLE",
+        "kind": "integer",
+        "nullable": true,
+        "description": "ROA: return on assets, annualised, percent."
+      },
+      {
+        "name": "roe",
+        "type": "DOUBLE",
+        "kind": "integer",
+        "nullable": true,
+        "description": "ROE: return on equity, annualised, percent."
+      },
+      {
+        "name": "equity_to_assets",
+        "type": "DOUBLE",
+        "kind": "integer",
+        "nullable": true,
+        "description": "EQV: equity capital to assets, percent."
+      },
+      {
+        "name": "leverage_ratio",
+        "type": "DOUBLE",
+        "kind": "integer",
+        "nullable": true,
+        "description": "RBC1AAJ: leverage (core capital) ratio, percent."
+      },
+      {
+        "name": "noncurrent_loans",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "NCLNLS: noncurrent loans and leases, $000."
+      },
+      {
+        "name": "re_1_4_family_past_due_30_89",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "P3RERES: 1-4 family loans 30-89 days past due, $000."
+      },
+      {
+        "name": "re_1_4_family_nonaccrual",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "NARERES: 1-4 family loans in nonaccrual, $000."
+      },
+      {
+        "name": "re_1_4_family_net_chargeoffs",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "NTRERES: 1-4 family net charge-offs year to date, $000."
+      },
+      {
+        "name": "employees",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": true,
+        "description": "NUMEMP: full-time equivalent employees."
+      }
+    ]
+  },
+  "fdic_institutions": {
+    "description": "FDIC BankFind institution directory (open and closed).",
+    "primary_key": [
+      "cert"
+    ],
+    "columns": [
+      {
+        "name": "cert",
+        "type": "INTEGER",
+        "kind": "integer",
+        "nullable": false,
+        "description": "FDIC certificate number."
+      },
+      {
+        "name": "rssd_id",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "FED_RSSD: Federal Reserve RSSD id."
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Institution name (current or last)."
+      },
+      {
+        "name": "city",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "City."
+      },
+      {
+        "name": "state",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "State (postal code)."
+      },
+      {
+        "name": "active",
+        "type": "BOOLEAN",
+        "kind": "bool",
+        "nullable": true,
+        "description": "Open and insured today."
+      },
+      {
+        "name": "bank_class",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "BKCLASS charter class."
+      },
+      {
+        "name": "regulator",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "REGAGNT primary federal regulator."
+      },
+      {
+        "name": "established_date",
+        "type": "DATE",
+        "kind": "date",
+        "nullable": true,
+        "description": "ESTYMD."
+      },
+      {
+        "name": "insured_date",
+        "type": "DATE",
+        "kind": "date",
+        "nullable": true,
+        "description": "INSDATE."
+      },
+      {
+        "name": "end_date",
+        "type": "DATE",
+        "kind": "date",
+        "nullable": true,
+        "description": "ENDEFYMD; 9999-12-31 for open institutions."
+      },
+      {
+        "name": "holding_company_rssd_id",
+        "type": "BIGINT",
+        "kind": "integer",
+        "nullable": true,
+        "description": "RSSDHCR: regulatory top holder RSSD."
+      },
+      {
+        "name": "holding_company_name",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "NAMEHCR."
+      },
+      {
+        "name": "community_bank",
+        "type": "BOOLEAN",
+        "kind": "bool",
+        "nullable": true,
+        "description": "CB: FDIC community bank flag."
+      },
+      {
+        "name": "specialization",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "SPECGRPN: asset concentration group."
+      }
+    ]
+  },
+  "mortgage_complaints": {
+    "description": "CFPB Consumer Complaint Database, product = Mortgage, with a name-based match to HMDA lenders.",
+    "primary_key": [
+      "complaint_id"
+    ],
+    "columns": [
+      {
+        "name": "complaint_id",
+        "type": "BIGINT",
+        "kind": "id",
+        "nullable": false,
+        "description": "CFPB complaint id."
+      },
+      {
+        "name": "date_received",
+        "type": "DATE",
+        "kind": "date",
+        "nullable": false,
+        "description": "Date the CFPB received the complaint."
+      },
+      {
+        "name": "year",
+        "type": "SMALLINT",
+        "kind": "year",
+        "nullable": false,
+        "description": "Calendar year of date_received."
+      },
+      {
+        "name": "product",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Always 'Mortgage' in this table."
+      },
+      {
+        "name": "sub_product",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Mortgage sub-product as published."
+      },
+      {
+        "name": "issue",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Issue."
+      },
+      {
+        "name": "sub_issue",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Sub-issue."
+      },
+      {
+        "name": "company",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Company name as published by the CFPB."
+      },
+      {
+        "name": "state",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Consumer's state."
+      },
+      {
+        "name": "zip_code",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Consumer's ZIP code as published (may be truncated or XX)."
+      },
+      {
+        "name": "tags",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Tags (Older American, Servicemember)."
+      },
+      {
+        "name": "submitted_via",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Channel."
+      },
+      {
+        "name": "date_sent_to_company",
+        "type": "DATE",
+        "kind": "date",
+        "nullable": true,
+        "description": "Date sent to company."
+      },
+      {
+        "name": "company_response",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Company response to consumer."
+      },
+      {
+        "name": "company_public_response",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Company public response."
+      },
+      {
+        "name": "timely_response",
+        "type": "BOOLEAN",
+        "kind": "bool",
+        "nullable": true,
+        "description": "Timely response?"
+      },
+      {
+        "name": "company_normalized",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "Company name after this project's normalisation."
+      },
+      {
+        "name": "matched_lei",
+        "type": "VARCHAR",
+        "kind": "id",
+        "nullable": true,
+        "description": "LEI of the HMDA lender the company name was matched to."
+      },
+      {
+        "name": "matched_lender_name",
+        "type": "VARCHAR",
+        "kind": "text",
+        "nullable": true,
+        "description": "HMDA respondent name that was matched."
+      },
+      {
+        "name": "match_method",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "How the match was made.",
+        "allowed_values": [
+          "exact_name",
+          "normalized_name",
+          "core_name",
+          "ambiguous",
+          "none"
+        ]
+      },
+      {
+        "name": "match_confidence",
+        "type": "VARCHAR",
+        "kind": "category",
+        "nullable": true,
+        "description": "high = identical name or identical normalised name, single LEI; medium = identical core name (generic words removed), single LEI; none = no match or ambiguous.",
+        "allowed_values": [
+          "high",
+          "medium",
+          "none"
+        ]
+      }
+    ]
+  }
+}

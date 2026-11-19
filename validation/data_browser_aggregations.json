@@ -1,0 +1,182 @@
+{
+  "fetched_at": "2026-11-19T02:47:40Z",
+  "api": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations",
+  "years": {
+    "2018": {
+      "actions_taken": {
+        "3": 2552640,
+        "2": 338822,
+        "1": 7732289,
+        "5": 554481,
+        "4": 1771582,
+        "7": 101772,
+        "6": 2012221,
+        "8": 74703
+      },
+      "actions_taken_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2018&actions_taken=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8",
+      "loan_purposes": {
+        "1": 7783566,
+        "31": 2230306,
+        "32": 2565685,
+        "2": 1194169,
+        "5": 247030,
+        "4": 1117754
+      },
+      "loan_purposes_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2018&loan_purposes=1%2C2%2C31%2C32%2C4%2C5"
+    },
+    "2019": {
+      "actions_taken": {
+        "3": 2536776,
+        "1": 9344813,
+        "4": 2146690,
+        "5": 720712,
+        "7": 76609,
+        "8": 73643,
+        "6": 2272958,
+        "2": 401762
+      },
+      "actions_taken_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2019&actions_taken=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8",
+      "loan_purposes": {
+        "1": 7969553,
+        "2": 1147905,
+        "31": 4155526,
+        "32": 3002115,
+        "4": 1099196,
+        "5": 199668
+      },
+      "loan_purposes_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2019&loan_purposes=1%2C2%2C31%2C32%2C4%2C5"
+    },
+    "2020": {
+      "actions_taken": {
+        "1": 14637334,
+        "2": 660757,
+        "3": 2886263,
+        "6": 2778730,
+        "7": 57561,
+        "8": 69971,
+        "4": 3360047,
+        "5": 1248380
+      },
+      "actions_taken_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2020&actions_taken=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8",
+      "loan_purposes": {
+        "1": 8420581,
+        "4": 858083,
+        "31": 11357068,
+        "32": 3756516,
+        "2": 917960,
+        "5": 388835
+      },
+      "loan_purposes_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2020&loan_purposes=1%2C2%2C31%2C32%2C4%2C5"
+    },
+    "2021": {
+      "actions_taken": {
+        "1": 15091528,
+        "2": 633595,
+        "4": 3341816,
+        "5": 1404858,
+        "3": 2950191,
+        "6": 2700264,
+        "7": 52773,
+        "8": 94955
+      },
+      "actions_taken_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2021&actions_taken=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8",
+      "loan_purposes": {
+        "1": 9241280,
+        "31": 9787904,
+        "32": 5176028,
+        "4": 870089,
+        "5": 122722,
+        "2": 1071957
+      },
+      "loan_purposes_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2021&loan_purposes=1%2C2%2C31%2C32%2C4%2C5"
+    },
+    "2022": {
+      "actions_taken": {
+        "1": 8416071,
+        "3": 2525024,
+        "4": 2233245,
+        "7": 74275,
+        "2": 420518,
+        "5": 747635,
+        "6": 1572452,
+        "8": 136755
+      },
+      "actions_taken_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2022&actions_taken=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8",
+      "loan_purposes": {
+        "1": 7951617,
+        "2": 1490696,
+        "32": 3243552,
+        "5": 72190,
+        "31": 2063139,
+        "4": 1304781
+      },
+      "loan_purposes_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2022&loan_purposes=1%2C2%2C31%2C32%2C4%2C5"
+    },
+    "2023": {
+      "actions_taken": {
+        "1": 5710399,
+        "2": 310898,
+        "3": 2037094,
+        "4": 1468108,
+        "8": 175823,
+        "6": 1263097,
+        "7": 62622,
+        "5": 536137
+      },
+      "actions_taken_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2023&actions_taken=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8",
+      "loan_purposes": {
+        "2": 1247562,
+        "4": 1319056,
+        "32": 1542846,
+        "1": 6554532,
+        "5": 55454,
+        "31": 844728
+      },
+      "loan_purposes_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2023&loan_purposes=1%2C2%2C31%2C32%2C4%2C5"
+    },
+    "2024": {
+      "actions_taken": {
+        "1": 6197085,
+        "2": 361232,
+        "3": 2103462,
+        "5": 581940,
+        "6": 1276504,
+        "4": 1538273,
+        "8": 153391,
+        "7": 47312
+      },
+      "actions_taken_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2024&actions_taken=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8",
+      "loan_purposes": {
+        "1": 6577902,
+        "2": 1205589,
+        "31": 1320403,
+        "4": 1397909,
+        "5": 20383,
+        "32": 1737013
+      },
+      "loan_purposes_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2024&loan_purposes=1%2C2%2C31%2C32%2C4%2C5"
+    },
+    "2025": {
+      "actions_taken": {
+        "4": 1710723,
+        "2": 417961,
+        "1": 6827891,
+        "5": 695006,
+        "6": 1578064,
+        "7": 50499,
+        "8": 148372,
+        "3": 2115090
+      },
+      "actions_taken_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2025&actions_taken=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8",
+      "loan_purposes": {
+        "31": 1977649,
+        "1": 6687105,
+        "4": 1412869,
+        "5": 29458,
+        "2": 1217830,
+        "32": 2218695
+      },
+      "loan_purposes_url": "https://ffiec.cfpb.gov/v2/data-browser-api/view/nationwide/aggregations?years=2025&loan_purposes=1%2C2%2C31%2C32%2C4%2C5"
+    }
+  }
+}

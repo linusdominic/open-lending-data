@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    # Lint, types and tests on the committed sample only: no downloads of source data.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: astral-sh/setup-uv@v10.3.3
+      - run: uv sync --python 3.12 --locked
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+      - run: uv run mypy
+      - run: uv run pytest
+      - run: uv run openlending validate --sample
+      - name: Data dictionary is up to date
+        run: |
+          uv run openlending docs
+          git diff --exit-code docs/data-dictionary.md docs/data-dictionary.json
