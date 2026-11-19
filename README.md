@@ -15,6 +15,11 @@ comes from that run; the command that produced it is next to it or in
 [Reproducing the numbers](#reproducing-the-numbers). The release files are published as
 [release v0.1.0](https://github.com/linusdominic/open-lending-data/releases/tag/v0.1.0) (31 Parquet files, 13.22 GB).
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/architecture-dark.svg">
+  <img alt="How the dataset is built: 57 zip files from the FFIEC and CFPB, recorded in a SHA-256 manifest, are staged to text Parquet with raw line counts recorded. The lar, core and historic steps run typed SQL generated from schema.py one year at a time; the lenders, fdic and complaints steps add the FDIC BankFind institutions and 78 quarters of financials, matching RSSD ids to FDIC certificates and complaint names to LEIs. The result is six Parquet tables, checked by validate with 630 checks." src="docs/img/architecture-light.svg">
+</picture>
+
 ## Why
 
 HMDA data are published by the FFIEC and the CFPB in formats that do not line up across
@@ -205,6 +210,11 @@ its manifest entry is not downloaded again.
 mismatches (explained below), 19 informational, **0 integrity failures**. The full table, with
 expected value, actual value and source for every check, is
 [docs/validation-report.md](docs/validation-report.md).
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/validation-dark.svg">
+  <img alt="Build and validation results, one run on 19 Nov 2026: 325,140,977 HMDA records on one schema for 2007-2025, equal to the raw line counts in 19 of 19 years; 0 integrity failures in 630 checks (483 pass, 128 external mismatches, 19 informational); 0 differences from the FFIEC's published derived race, ethnicity and sex over 137,678,531 records; 234 of 261 published totals matched." src="docs/img/validation-light.svg">
+</picture>
 
 **Integrity checks** (about this pipeline; any failure exits 1):
 

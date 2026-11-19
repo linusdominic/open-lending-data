@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="255" viewBox="0 0 960 255" role="img" aria-label="Build and validation results, one run on 19 Nov 2026: 325,140,977 HMDA records on one schema for 2007-2025, equal to the raw line counts in 19 of 19 years; 0 integrity failures in 630 checks (483 pass, 128 external mismatches, 19 informational); 0 differences from the FFIEC&#x27;s published derived race, ethnicity and sex over 137,678,531 records; 234 of 261 published totals matched.">
+  <title>Build and validation results, one run on 19 Nov 2026: 325,140,977 HMDA records on one schema for 2007-2025, equal to the raw line counts in 19 of 19 years; 0 integrity failures in 630 checks (483 pass, 128 external mismatches, 19 informational); 0 differences from the FFIEC&#x27;s published derived race, ethnicity and sex over 137,678,531 records; 234 of 261 published totals matched.</title>
+  <rect x="0.5" y="0.5" width="959" height="254" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <text x="28.0" y="40.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#f0f6fc" text-anchor="start">What the build and validation run produced</text>
+  <text x="28.0" y="60.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">One build and one validation run on one machine, 19 Nov 2026.</text>
+  <rect x="28.0" y="82.0" width="22" height="4" rx="2" fill="#3987e5"/>
+  <text x="28.0" y="120.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#f0f6fc" text-anchor="start">325,140,977</text>
+  <text x="28.0" y="143.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">HMDA records on one schema,</text>
+  <text x="28.0" y="162.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">2007-2025</text>
+  <text x="28.0" y="183.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">hmda_lar_core, equal to the raw</text>
+  <text x="28.0" y="200.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">line counts in 19 of 19 years</text>
+  <line x1="254.0" y1="80.0" x2="254.0" y2="198.0" stroke="#30363d"/>
+  <rect x="274.0" y="82.0" width="22" height="4" rx="2" fill="#199e70"/>
+  <text x="274.0" y="120.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#f0f6fc" text-anchor="start">0</text>
+  <text x="274.0" y="143.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">integrity failures in 630 checks</text>
+  <text x="274.0" y="164.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">483 pass, 128 external</text>
+  <text x="274.0" y="181.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">mismatches, 19 informational</text>
+  <line x1="480.0" y1="80.0" x2="480.0" y2="198.0" stroke="#30363d"/>
+  <rect x="500.0" y="82.0" width="22" height="4" rx="2" fill="#199e70"/>
+  <text x="500.0" y="120.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#f0f6fc" text-anchor="start">0</text>
+  <text x="500.0" y="143.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">differences from the FFIEC&#x27;s</text>
+  <text x="500.0" y="162.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">published derived race,</text>
+  <text x="500.0" y="181.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">ethnicity and sex</text>
+  <text x="500.0" y="202.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">137,678,531 records, 2018-2025</text>
+  <line x1="706.0" y1="80.0" x2="706.0" y2="198.0" stroke="#30363d"/>
+  <rect x="726.0" y="82.0" width="22" height="4" rx="2" fill="#d95926"/>
+  <text x="726.0" y="120.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#f0f6fc" text-anchor="start">234 of 261</text>
+  <text x="726.0" y="143.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#9198a1" text-anchor="start">published totals matched</text>
+  <text x="726.0" y="164.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">FFIEC, CFPB and Federal Reserve</text>
+  <text x="726.0" y="181.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">figures; mismatches are</text>
+  <text x="726.0" y="198.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">reported, not fatal</text>
+  <text x="28.0" y="233.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#757e8a" text-anchor="start">Source: docs/validation-report.md and the row counts in the README, from openlending build and make validate on 19 Nov 2026.</text>
+</svg>

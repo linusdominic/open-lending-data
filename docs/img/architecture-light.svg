@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="338" viewBox="0 0 960 338" role="img" aria-label="How the dataset is built: 57 zip files from the FFIEC and CFPB, recorded in a SHA-256 manifest, are staged to text Parquet with raw line counts recorded. The lar, core and historic steps run typed SQL generated from schema.py one year at a time; the lenders, fdic and complaints steps add the FDIC BankFind institutions and 78 quarters of financials, matching RSSD ids to FDIC certificates and complaint names to LEIs. The result is six Parquet tables, checked by validate with 630 checks.">
+  <title>How the dataset is built: 57 zip files from the FFIEC and CFPB, recorded in a SHA-256 manifest, are staged to text Parquet with raw line counts recorded. The lar, core and historic steps run typed SQL generated from schema.py one year at a time; the lenders, fdic and complaints steps add the FDIC BankFind institutions and 78 quarters of financials, matching RSSD ids to FDIC certificates and complaint names to LEIs. The result is six Parquet tables, checked by validate with 630 checks.</title>
+  <rect x="0.5" y="0.5" width="959" height="337" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="28.0" y="40.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#1f2328" text-anchor="start">How the dataset is built</text>
+  <text x="28.0" y="60.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">Steps of openlending build, then make validate. Outputs are zstd Parquet files, one per table per year.</text>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#818b98"/></marker></defs>
+  <path d="M212.0,132.0 C240.0,132.0 237.0,132.0 265.0,132.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M452.0,132.0 C480.0,132.0 477.0,132.0 505.0,132.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M452.0,132.0 C480.0,132.0 477.0,251.0 505.0,251.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M212.0,251.0 C360.0,251.0 357.0,251.0 505.0,251.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M692.0,132.0 C720.0,132.0 717.0,132.0 745.0,132.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M692.0,251.0 C720.0,251.0 717.0,132.0 745.0,132.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <path d="M840.0,170.0 L840.0,202.0" fill="none" stroke="#818b98" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="28.0" y="86.0" width="184.0" height="92.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="29.0" y="94.0" width="3" height="76.0" rx="1.5" fill="#2a78d6"/>
+  <text x="42.0" y="111.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">Raw downloads</text>
+  <text x="42.0" y="131.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">57 zip files from the</text>
+  <text x="42.0" y="147.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">FFIEC and CFPB, SHA-256</text>
+  <text x="42.0" y="163.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">manifest</text>
+  <rect x="28.0" y="213.0" width="184.0" height="76.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="29.0" y="221.0" width="3" height="60.0" rx="1.5" fill="#2a78d6"/>
+  <text x="42.0" y="238.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">FDIC BankFind API</text>
+  <text x="42.0" y="258.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">institutions and 78</text>
+  <text x="42.0" y="274.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">quarters of financials</text>
+  <rect x="268.0" y="94.0" width="184.0" height="76.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="269.0" y="102.0" width="3" height="60.0" rx="1.5" fill="#afb8c1"/>
+  <text x="282.0" y="119.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">stage</text>
+  <text x="282.0" y="139.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">zip to text Parquet, raw</text>
+  <text x="282.0" y="155.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">line counts recorded</text>
+  <rect x="508.0" y="86.0" width="184.0" height="92.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="509.0" y="94.0" width="3" height="76.0" rx="1.5" fill="#afb8c1"/>
+  <text x="522.0" y="111.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">lar, core, historic</text>
+  <text x="522.0" y="131.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">typed SQL generated from</text>
+  <text x="522.0" y="147.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">schema.py, one year at a</text>
+  <text x="522.0" y="163.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">time</text>
+  <rect x="508.0" y="204.0" width="184.0" height="94.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="509.0" y="212.0" width="3" height="78.0" rx="1.5" fill="#afb8c1"/>
+  <text x="522.0" y="229.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">lenders, fdic,</text>
+  <text x="522.0" y="247.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">complaints</text>
+  <text x="522.0" y="267.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">RSSD id to FDIC cert,</text>
+  <text x="522.0" y="283.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">complaint names to LEI</text>
+  <rect x="748.0" y="94.0" width="184.0" height="76.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="749.0" y="102.0" width="3" height="60.0" rx="1.5" fill="#1baf7a"/>
+  <text x="762.0" y="119.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">Six Parquet tables</text>
+  <text x="762.0" y="139.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">hmda_lar, hmda_lar_core,</text>
+  <text x="762.0" y="155.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">lenders, bank_financials...</text>
+  <rect x="748.0" y="205.0" width="184.0" height="92.0" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="749.0" y="213.0" width="3" height="76.0" rx="1.5" fill="#eb6834"/>
+  <text x="762.0" y="230.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1f2328" text-anchor="start">validate</text>
+  <text x="762.0" y="250.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">630 checks: raw line</text>
+  <text x="762.0" y="266.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">counts, published totals,</text>
+  <text x="762.0" y="282.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">reconkit</text>
+  <rect x="28.0" y="318.0" width="3" height="12" rx="1.5" fill="#2a78d6"/>
+  <text x="38.0" y="328.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">input</text>
+  <rect x="91.0" y="318.0" width="3" height="12" rx="1.5" fill="#afb8c1"/>
+  <text x="101.0" y="328.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">step</text>
+  <rect x="150.5" y="318.0" width="3" height="12" rx="1.5" fill="#1baf7a"/>
+  <text x="160.5" y="328.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">stored result</text>
+  <rect x="261.6" y="318.0" width="3" height="12" rx="1.5" fill="#eb6834"/>
+  <text x="271.6" y="328.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#59636e" text-anchor="start">check</text>
+</svg>
