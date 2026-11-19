@@ -12,8 +12,8 @@ want to see how the harmonisation and its validation are done.
 Status: version 0.1.0. Built and validated on one machine (Apple silicon, macOS, 16 GB
 RAM, 10 cores, Python 3.12 via uv, DuckDB 2.0.0) on 19 November 2026. Every number below
 comes from that run; the command that produced it is next to it or in
-[Reproducing the numbers](#reproducing-the-numbers). The release files described here have
-been produced locally and not yet uploaded.
+[Reproducing the numbers](#reproducing-the-numbers). The release files are published as
+[release v0.1.0](https://github.com/linusdominic/open-lending-data/releases/tag/v0.1.0) (31 Parquet files, 13.22 GB).
 
 ## Why
 
@@ -316,7 +316,16 @@ pass).
 `make release-assets` wrote 31 Parquet files (13.22 GB, largest `hmda_lar_2021.parquet` at
 1,160.6 MB, so no year needed splitting under the 1.9 GB limit), `SHA256SUMS`,
 `release-manifest.json` (file, table, year, rows, bytes, SHA-256), `RELEASE_NOTES.md` and the
-documentation files to `data/release/`. Nothing is uploaded. Files over the limit would be
+documentation files to `data/release/`. They are attached to [release v0.1.0](https://github.com/linusdominic/open-lending-data/releases/tag/v0.1.0);
+after upload, the SHA-256 GitHub reports for each of the 38 attached files matched the local
+file. To use them without building:
+
+```bash
+gh release download v0.1.0 -R linusdominic/open-lending-data -D data/release
+cd data/release && sha256sum -c SHA256SUMS
+```
+
+Files over the limit would be
 split into `_partNofM` files by row position; that path is exercised by the tests on the
 sample with a 400 kB limit, not on real data.
 
