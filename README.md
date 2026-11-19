@@ -13,7 +13,7 @@ Status: version 0.1.0. Built and validated on one machine (Apple silicon, macOS,
 RAM, 10 cores, Python 3.12 via uv, DuckDB 2.0.0) on 19 November 2026. Every number below
 comes from that run; the command that produced it is next to it or in
 [Reproducing the numbers](#reproducing-the-numbers). The release files described here have
-been produced locally and not yet published.
+been produced locally and not yet uploaded.
 
 ## Why
 
@@ -365,8 +365,8 @@ derived data carries no additional restrictions from this project. The code is M
   change. Use `(activity_year, record_id)` only together with the file's SHA-256 in
   `data/raw/manifest.json`.
 - **Runs.** The full pipeline was run on one macOS machine. CI runs lint, type checks, tests
-  and `validate --sample` on Ubuntu; the full build has not been run on Linux or Windows. CI
-  has not yet run on GitHub (the repository is not published).
+  and `validate --sample` on Ubuntu (first run on GitHub passed, 19 Nov 2026); the full
+  build has not been run on Linux or Windows.
 - **dbt** was not used (see Design choices), so the dbt-core / dbt-duckdb versions noted as
   working on this machine were not exercised.
 - **The survey of existing datasets** in [Why](#why) (Hugging Face uploads, the CFPB's
