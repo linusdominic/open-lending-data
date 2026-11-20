@@ -7,7 +7,7 @@ RUN = $(UV) run
 install:
 	$(UV) sync --python 3.12
 
-download:            ## raw files (~11 GB) and FDIC API pulls into data/raw
+download:            ## raw files (12.15 GB) and FDIC API pulls into data/raw
 	$(RUN) openlending download
 
 build:               ## stage raw files, then build every table and data/openlending.duckdb
